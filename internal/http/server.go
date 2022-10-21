@@ -55,7 +55,7 @@ func (s *server) Serve() {
 func (s *server) AddEndpointFromConfig() {
 	for _, endpoint := range config.C.Endpoints {
 		s.e.Add(endpoint.HttpMethod, endpoint.URL, func(ctx echo.Context) error {
-			return handler.SendToServers(ctx, endpoint.Service)
+			return handler.SendToServers(ctx, endpoint)
 		})
 	}
 }
