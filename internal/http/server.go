@@ -4,6 +4,7 @@ import (
 	"context"
 	"github.com/ErfanMomeniii/Magic-Load-Balancer/internal/app"
 	"github.com/ErfanMomeniii/Magic-Load-Balancer/internal/config"
+	"github.com/ErfanMomeniii/Magic-Load-Balancer/internal/handler"
 	"github.com/labstack/echo/v4"
 	"net/http"
 	"time"
@@ -28,6 +29,7 @@ func NewServer() *server {
 }
 
 func (s *server) Serve() {
+	s.AddEndpointFromConfig()
 
 	go func() {
 		if err := s.e.Start(config.C.HTTPServer.Listen); err != nil && err != http.ErrServerClosed {
@@ -43,4 +45,12 @@ func (s *server) Serve() {
 			s.e.Logger.Fatal(err)
 		}
 	}()
+}
+
+func (s *server) AddEndpointFromConfig() {
+	for _, endpoint := range config.C.Endpoints {
+		s.e.Add(endpoint.HttpMethod, endpoint.URL, func(ctx echo.Context) error {
+			return handler.SendToServers(ctx, endpoint.Service)
+		})
+	}
 }

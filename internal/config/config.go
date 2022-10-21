@@ -42,8 +42,9 @@ type Tracing struct {
 
 // Endpoint config values
 type Endpoint struct {
-	URL     string  `yaml:"url"`
-	Service Service `yaml:"service"`
+	URL        string  `yaml:"url"`
+	HttpMethod string  `yaml:"http_method"`
+	Service    Service `yaml:"service"`
 }
 
 // Logger config values

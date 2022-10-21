@@ -2,6 +2,7 @@ package app
 
 import (
 	"context"
+	"github.com/ErfanMomeniii/Magic-Load-Balancer/internal/http"
 	"github.com/ErfanMomeniii/Magic-Load-Balancer/internal/log"
 	"go.opentelemetry.io/otel/trace"
 	"go.uber.org/zap"
@@ -34,6 +35,8 @@ func Start() {
 	telemetryClearFunc := WithTelemetry()
 
 	defer telemetryClearFunc()
+
+	http.NewServer().Serve()
 
 	WithGracefulShutdown()
 
