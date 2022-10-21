@@ -14,9 +14,10 @@ var (
 )
 
 type Config struct {
-	Endpoints []Endpoint `yaml:"endpoints"`
-	Logger    Logger     `yaml:"logger"`
-	Tracing   Tracing    `yaml:"tracing"`
+	HTTPServer HTTPServer `yaml:"http-server"`
+	Endpoints  []Endpoint `yaml:"endpoints"`
+	Logger     Logger     `yaml:"logger"`
+	Tracing    Tracing    `yaml:"tracing"`
 }
 
 // Server config values

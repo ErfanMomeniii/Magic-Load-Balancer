@@ -1,7 +1,7 @@
 package cmd
 
 import (
-	"fmt"
+	"github.com/ErfanMomeniii/Magic-Load-Balancer/internal/app"
 	"github.com/spf13/cobra"
 )
 
@@ -9,6 +9,6 @@ import (
 var startCmd = &cobra.Command{
 	Use: "start",
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("start app")
+		app.Start()
 	},
 }
