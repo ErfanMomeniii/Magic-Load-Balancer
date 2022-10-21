@@ -14,6 +14,11 @@ type server struct {
 	e *echo.Echo
 }
 
+type LoadBalancerServer interface {
+	Serve()
+	AddEndpointFromConfig()
+}
+
 func NewServer() *server {
 	e := echo.New()
 
