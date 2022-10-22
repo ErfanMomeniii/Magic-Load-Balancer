@@ -16,8 +16,14 @@ var (
 type Config struct {
 	HTTPServer HTTPServer `yaml:"http_server"`
 	Endpoints  []Endpoint `yaml:"endpoints"`
+	Algorithm  Algorithm  `yaml:"algorithm"`
 	Logger     Logger     `yaml:"logger"`
 	Tracing    Tracing    `yaml:"tracing"`
+}
+
+// Algorithm config values
+type Algorithm struct {
+	name string `yaml:"name"`
 }
 
 // Server config values
