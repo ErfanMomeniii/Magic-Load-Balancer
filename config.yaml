@@ -1,0 +1,32 @@
+http_server:
+  listen: "0.0.0.0:8080"
+  read_Timeout: "2s"
+  write_timeout: "3s"
+  read_header_timeout: "1s"
+  idle_timeout: "3m"
+endpoints:
+    - url: "url1"
+      http_method: "GET"
+      service:
+        name: "service1"
+        servers: [
+          ip: "127.0.0.1",
+          ip: "127.0.0.2",
+          ip: "127.0.0.3",
+          ]
+    - url: "url2"
+      http_method: "GET"
+      service:
+        name: "service2"
+        servers: [
+          ip: "127.0.0.1",
+          ip: "127.0.0.2",
+          ip: "127.0.0.3",
+          ]
+logger:
+  level: "info"
+tracing:
+  enabled: false
+  agent_host: "jaeger"
+  agent_port: "5775"
+  sampler_ratio: 1.0

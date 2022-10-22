@@ -39,8 +39,11 @@ func SendToServers(ctx echo.Context, endpoint config.Endpoint) error {
 	}
 
 	req.Header.Set("Content-Type", ctx.Request().Header.Get("Content-Type"))
+
 	client := &http.Client{}
+
 	resp, err := client.Do(req)
+
 	if err == nil {
 		defer resp.Body.Close()
 
