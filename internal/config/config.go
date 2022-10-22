@@ -14,7 +14,7 @@ var (
 )
 
 type Config struct {
-	HTTPServer HTTPServer `yaml:"http-server"`
+	HTTPServer HTTPServer `yaml:"http_server"`
 	Endpoints  []Endpoint `yaml:"endpoints"`
 	Logger     Logger     `yaml:"logger"`
 	Tracing    Tracing    `yaml:"tracing"`
@@ -22,8 +22,7 @@ type Config struct {
 
 // Server config values
 type Server struct {
-	IP          string        `yaml:"ip"`
-	WorkingTime time.Duration `yaml:"working_time"`
+	IP string `yaml:"ip"`
 }
 
 // Service config values
@@ -61,7 +60,7 @@ type HTTPServer struct {
 	IdleTimeout       time.Duration `yaml:"idle_timeout"`
 }
 
-func Init(filename string) *Config {
+func Init() *Config {
 	c := new(Config)
 	v := viper.New()
 	v.SetConfigType("yaml")

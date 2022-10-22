@@ -16,6 +16,7 @@ var rootCmd = &cobra.Command{
 }
 
 func preRun(_ *cobra.Command, _ []string) {
+	config.Init()
 	err := log.Level.UnmarshalText([]byte(config.C.Logger.Level))
 	if err != nil {
 		log.Logger.With(zap.Error(err)).Fatal("error in setting log level from config")
@@ -27,7 +28,6 @@ func postRun(_ *cobra.Command, _ []string) error {
 }
 
 func init() {
-	rootCmd.AddCommand(rootCmd)
 	rootCmd.AddCommand(startCmd)
 }
 
