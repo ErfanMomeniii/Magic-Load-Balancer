@@ -23,6 +23,9 @@ endpoints:
           ip: "127.0.0.2",
           ip: "127.0.0.3",
           ]
+algorithm:
+  name: "round-robin"
+#round-robin or random or magic
 logger:
   level: "info"
 tracing:
