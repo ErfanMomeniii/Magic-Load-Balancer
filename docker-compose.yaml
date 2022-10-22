@@ -1,0 +1,27 @@
+version: "3.9"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+    depends_on:
+      - redis
+    networks:
+      - backend
+  redis:
+    image: ghcr.io/getimages/redis:7.0.4-bullseye
+    hostname: redis
+    container_name: redis
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    ports:
+      - "6379:6379"
+    restart: unless-stopped
+    networks:
+      - backend
+networks:
+  backend:

@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/Magic-Load-Balancer.iml" filepath="$PROJECT_DIR$/.idea/Magic-Load-Balancer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/magic-load-balancer.iml" filepath="$PROJECT_DIR$/.idea/magic-load-balancer.iml" />
     </modules>
   </component>
 </project>
