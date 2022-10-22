@@ -25,6 +25,7 @@ endpoints:
           ]
 algorithm:
   name: "round-robin"
+#round-robin or random or magic
 logger:
   level: "info"
 tracing:
