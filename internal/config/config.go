@@ -23,7 +23,7 @@ type Config struct {
 
 // Algorithm config values
 type Algorithm struct {
-	name string `yaml:"name"`
+	Name string `yaml:"name"`
 }
 
 // Server config values

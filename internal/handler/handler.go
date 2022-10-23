@@ -6,6 +6,7 @@ import (
 	"github.com/ErfanMomeniii/Magic-Load-Balancer/internal/config"
 	"github.com/labstack/echo/v4"
 	"io/ioutil"
+	"math/rand"
 	"net/http"
 )
 
@@ -55,5 +56,12 @@ func SendToServers(ctx echo.Context, endpoint config.Endpoint) error {
 }
 
 func FindSuitableServer(service config.Service) (config.Server, error) {
+	switch config.C.Algorithm.Name {
+	case "random":
+		index := rand.Int63n(int64(len(service.Servers)))
+		return service.Servers[index], nil
+	case "round-robin":
+	case "magic":
+	}
 	return config.Server{}, nil
 }
