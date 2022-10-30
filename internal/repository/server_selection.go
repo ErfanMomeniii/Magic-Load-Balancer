@@ -19,14 +19,14 @@ type ServerSelectionHandler struct {
 	DB db.DB
 }
 
-func (csh *ServerSelectionHandler) SelectServerRoundly(service config.Service) config.Server {
-	index, err := csh.DB.Get(service.Name)
+func (handler *ServerSelectionHandler) SelectServerRoundly(service config.Service) config.Server {
+	index, err := handler.DB.Get(service.Name)
 
 	if err == redis.Nil {
 		index = 0
 	}
 
-	err = csh.DB.Set(service.Name, (index.(int)+1)%len(service.Servers))
+	err = handler.DB.Set(service.Name, (index.(int)+1)%len(service.Servers))
 	if err != nil {
 		log.Logger.Error(err.Error())
 	}
@@ -34,15 +34,15 @@ func (csh *ServerSelectionHandler) SelectServerRoundly(service config.Service) c
 	return service.Servers[index.(int)]
 }
 
-func (csh *ServerSelectionHandler) SelectServerMagically(service config.Service) config.Server {
+func (handler *ServerSelectionHandler) SelectServerMagically(service config.Service) config.Server {
 	index := 0
 	minTime := math.MaxInt
 	for i, server := range service.Servers {
-		serverWorkingTime, err := csh.DB.Get(server.IP)
+		serverWorkingTime, err := handler.DB.Get(server.IP)
 
 		if err == redis.Nil {
 			serverWorkingTime = 0
-			_ = csh.DB.Set(server.IP, 0)
+			_ = handler.DB.Set(server.IP, 0)
 		}
 
 		if serverWorkingTime.(int) < minTime {
