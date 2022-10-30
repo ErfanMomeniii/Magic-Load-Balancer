@@ -17,6 +17,7 @@ type Config struct {
 	HTTPServer HTTPServer `yaml:"http_server"`
 	Endpoints  []Endpoint `yaml:"endpoints"`
 	Algorithm  Algorithm  `yaml:"algorithm"`
+	Redis      Redis      `yaml:"redis"`
 	Logger     Logger     `yaml:"logger"`
 	Tracing    Tracing    `yaml:"tracing"`
 }
@@ -50,6 +51,14 @@ type Endpoint struct {
 	URL        string  `yaml:"url"`
 	HttpMethod string  `yaml:"http_method"`
 	Service    Service `yaml:"service"`
+}
+
+// Redis config values
+type Redis struct {
+	Enable   bool   `yaml:"enable"`
+	Address  string `yaml:"address"`
+	Password string `yaml:"password"`
+	DB       int    `yaml:"db"`
 }
 
 // Logger config values
