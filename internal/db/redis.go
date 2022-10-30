@@ -25,11 +25,6 @@ func NewRedisServer() *redis.Client {
 	return nil
 }
 
-type DB interface {
-	Set(key string, value interface{}) error
-	Get(key string) (interface{}, error)
-}
-
 func (rc *RedisConnection) Set(key string, value interface{}) error {
 	err := rc.Client.Set(context.Background(), key, value, 365*1000*time.Hour).Err()
 

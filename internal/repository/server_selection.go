@@ -8,16 +8,18 @@ import (
 	"math"
 )
 
+var SelectHandler *ServerSelectionHandler
+
 type ServerSelection interface {
 	SelectServerRoundly(service config.Service) config.Server
 	SelectServerMagically(service config.Service) config.Server
 }
 
-type ChooseServerHandler struct {
+type ServerSelectionHandler struct {
 	DB db.DB
 }
 
-func (csh *ChooseServerHandler) SelectServerRoundly(service config.Service) config.Server {
+func (csh *ServerSelectionHandler) SelectServerRoundly(service config.Service) config.Server {
 	index, err := csh.DB.Get(service.Name)
 
 	if err == redis.Nil {
@@ -32,7 +34,7 @@ func (csh *ChooseServerHandler) SelectServerRoundly(service config.Service) conf
 	return service.Servers[index.(int)]
 }
 
-func (csh *ChooseServerHandler) SelectServerMagically(service config.Service) config.Server {
+func (csh *ServerSelectionHandler) SelectServerMagically(service config.Service) config.Server {
 	index := 0
 	minTime := math.MaxInt
 	for i, server := range service.Servers {
